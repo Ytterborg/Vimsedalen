@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,46 +9,52 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="spel.js"></script>
-    
+    <link href="https://fonts.googleapis.com/css?family=Sigmar+One" rel="stylesheet">
+
 </head>
 
-<body ng-app = "vimsedalenApp" ng-controller = "gameController" ng-cloak>
-     <h1>Ett rymdskepp har kraschlandat i Vimsedalen</h1>
-     <h2 id="subheading">-Hjälp kaptenen att hitta sin besättning</h2>
-     
-     <div id="wrapper">
-    <div id="grid" >
-        <span ng-repeat ="picture in pictures" >
-             <img id="{{$index}}" ng-src="{{picture.picName}}" data-ng-click="checkIfRightPicture($event)">
-        </span>
-    </div>
-   
-      <div id="info">
-        <h4>Tid</h4>
-        <div id="timeLeft">
-            {{timeLeft}}
-        </div>
-        <h4>Poäng</h4>
-        <div>
-            {{score}}
-        </div>
-        <h4>Omgång</h4>
-        <div>
-            {{round}}
-        </div>
-        <h4>Hitta mig!</h4>
-        <div id="rightPicture">
-            <img ng-src="{{rightPicture}}" >
-        </div>
-    </div>  
+<body ng-app="vimsedalenApp" ng-controller="gameController" ng-cloak>
+    <h1>Ett rymdskepp har kraschlandat i Vimsedalen</h1>
+    <h2 id="subheading">-Hjälp kaptenen att hitta sin besättning</h2>
 
-    <div id="rules">
-        <h2>Regler</h2>
-        <h4>Hjälp rymdskeppets kapten att hitta sin kamrat som dyker upp på bilden.</h4>
-        <p>Du får fler poäng om du är snabb.</p>
-        <p>Efter 10 omgångar räknas poängen ihop.</p>
-        <p>Lycka till med att hitta alla!</p>
+    <div id="wrapper">
+        <div id="grid">
+            <span ng-repeat="picture in pictures">
+                <img id="{{$index}}" ng-src="{{picture.picName}}" data-ng-click="checkIfRightPicture($event)">
+            </span>
+        </div>
+
+        <div id="info">
+            <h4>Hitta mig!</h4>
+            <div id="rightPicture">
+                <img ng-src="{{rightPicture}}">
+            </div>
+            <br>
+            <div id="timeLeft">
+                    Tid: 
+                {{timeLeft}}
+            </div>
+            <br>
+            <div>
+                Poäng: 
+                {{score}}
+            </div>
+            <br>
+                <div>
+                Omgång: 
+                {{round}}
+            </div>
+            
+        </div>
+
+        <div id="rules">
+            <h2>Regler</h2>
+            <p>Hjälp rymdskeppets kapten att hitta sin kamrat som dyker upp här bredvid.</p>
+            <p>Du får fler poäng om du är snabb.</p>
+            <p>Efter 10 omgångar räknas poängen ihop.</p>
+            <p>Lycka till med att hitta alla!</p>
+        </div>
     </div>
-</div>   
 </body>
+
 </html>

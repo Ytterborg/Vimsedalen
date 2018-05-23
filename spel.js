@@ -65,11 +65,11 @@ app.controller('gameController', function ($scope, $interval) {
                     $scope.score = $scope.score + $scope.timeLeft;
                 
 
-                alert("Ja, du hittade rätt!");
+                //alert("Ja, du hittade rätt!");
 
                 removeClassWrong();
 
-                if($scope.round == 2){
+                if($scope.round == 10){
                    if(confirm("Bra jobbat! Du fick totalt " + $scope.score + " poäng. Vill du spela igen?")){
                         playing = false;
                         return gameloop();
@@ -82,7 +82,7 @@ app.controller('gameController', function ($scope, $interval) {
                     
                 $scope.timeLeft = timeLeft;
                 
-                if($scope.round < 2){
+                if($scope.round < 10){
                      $scope.round = ++$scope.round;
                 }
 
