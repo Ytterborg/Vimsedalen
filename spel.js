@@ -25,10 +25,11 @@ app.controller('gameController', function ($scope, $interval, $mdDialog) {
     ];
 
     let score = 0;
-    let timeLeft = 10;
+    let timeLeft = 100;
     let round = 1;
     let playing = false;
-    let totalRounds = 2;
+    let totalRounds = 10;
+    let speed = 50;
 
 
     let gameloop = function () {
@@ -52,7 +53,7 @@ app.controller('gameController', function ($scope, $interval, $mdDialog) {
                     if ($scope.timeLeft > 0) {
                         $scope.timeLeft = --$scope.timeLeft;
                     }
-                }, 1000);
+                }, speed);
             }, function () {
                 window.location.reload();
             });
@@ -71,7 +72,7 @@ app.controller('gameController', function ($scope, $interval, $mdDialog) {
                 if ($scope.timeLeft > 0) {
                     $scope.timeLeft = --$scope.timeLeft;
                 }
-            }, 1000);
+            }, speed);
         }
 
 
@@ -94,7 +95,7 @@ app.controller('gameController', function ($scope, $interval, $mdDialog) {
 
 
                     let startGame = $mdDialog.confirm()
-                        .parent(angular.element(document.querySelector('#info')))
+                        .parent(angular.element(document.querySelector('#rules')))
                         .title('Bra jobbat!')
                         .textContent('Du har hittat hela skeppets besättning. Du fick ' + $scope.score + ' poäng. Vill du spela igen?')
                         .ariaLabel('Spela igen')
