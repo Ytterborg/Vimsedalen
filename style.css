@@ -1,6 +1,9 @@
 h1{
-color: yellowgreen;
 text-align: center;
+}
+
+#subheading{
+    text-align: center;
 }
 
 #grid{

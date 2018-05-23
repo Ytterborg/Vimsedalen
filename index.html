@@ -12,7 +12,8 @@
 </head>
 
 <body ng-app = "vimsedalenApp" ng-controller = "gameController" ng-cloak>
-     <h1>Hitta i Vimsedalen</h1>
+     <h1>Ett rymdskepp har kraschlandat i Vimsedalen</h1>
+     <h2 id="subheading">-Hjälp kaptenen att hitta sin besättning</h2>
      
      <div id="wrapper">
     <div id="grid" >
@@ -34,7 +35,7 @@
         <div>
             {{round}}
         </div>
-        <h4>Hitta min kompis!</h4>
+        <h4>Hitta mig!</h4>
         <div id="rightPicture">
             <img ng-src="{{rightPicture}}" >
         </div>
@@ -42,10 +43,9 @@
 
     <div id="rules">
         <h2>Regler</h2>
-        <h4>Hjälp djuren i Vimsedalen att hitta sin kompis</h4>
-        <p>1. Välj samma bild som visas.</p>
-        <p>2. Du får fler poäng om du är snabb.</p>
-        <p>3. Efter 10 omgångar räknas poängen ihop.</p>
+        <h4>Hjälp rymdskeppets kapten att hitta sin kamrat som dyker upp på bilden.</h4>
+        <p>Du får fler poäng om du är snabb.</p>
+        <p>Efter 10 omgångar räknas poängen ihop.</p>
         <p>Lycka till med att hitta alla!</p>
     </div>
 </div>   
