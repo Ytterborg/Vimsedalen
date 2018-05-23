@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vimsedalen</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="spel.js"></script>
+    
+</head>
+
+<body ng-app = "vimsedalenApp" ng-controller = "gameController" ng-cloak>
+     <h1>Hitta i Vimsedalen</h1>
+     
+     <div id="wrapper">
+    <div id="grid" >
+        <span ng-repeat ="picture in pictures" >
+             <img id="{{$index}}" ng-src="{{picture.picName}}" data-ng-click="checkIfRightPicture($event)">
+        </span>
+    </div>
+   
+      <div id="info">
+        <h4>Tid</h4>
+        <div id="timeLeft">
+            {{timeLeft}}
+        </div>
+        <h4>Poäng</h4>
+        <div>
+            {{score}}
+        </div>
+        <h4>Omgång</h4>
+        <div>
+            {{round}}
+        </div>
+        <h4>Hitta min kompis!</h4>
+        <div id="rightPicture">
+            <img ng-src="{{rightPicture}}" >
+        </div>
+    </div>  
+
+    <div id="rules">
+        <h2>Regler</h2>
+        <h4>Hjälp djuren i Vimsedalen att hitta sin kompis</h4>
+        <p>1. Välj samma bild som visas.</p>
+        <p>2. Du får fler poäng om du är snabb.</p>
+        <p>3. Efter 10 omgångar räknas poängen ihop.</p>
+        <p>Lycka till med att hitta alla!</p>
+    </div>
+</div>   
+</body>
+</html>

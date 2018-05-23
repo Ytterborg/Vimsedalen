@@ -1,0 +1,38 @@
+h1{
+color: yellowgreen;
+text-align: center;
+}
+
+#grid{
+    width: 840px;  
+}
+
+#grid > * {
+
+}
+
+
+
+#info{
+    
+}
+
+#info > * {
+ 
+    
+}
+
+#rules{
+    width: 200px;
+}
+
+#wrapper{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+.wrong{
+    filter: opacity(10%);
+}
