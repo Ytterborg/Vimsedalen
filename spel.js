@@ -1,6 +1,6 @@
-let app = angular.module('vimsedalenApp', []);
+let app = angular.module('vimsedalenApp', ['ngMaterial']);
 
-app.controller('gameController', function ($scope, $interval) {
+app.controller('gameController', function ($scope, $interval, $mdDialog) {
     let pictureCollection = [
         { "picName": '1.png', "id": 1 },
         { "picName": '2.png', "id": 2 },
@@ -28,66 +28,103 @@ app.controller('gameController', function ($scope, $interval) {
     let timeLeft = 10;
     let round = 1;
     let playing = false;
-    
+    let totalRounds = 2;
+
 
     let gameloop = function () {
 
-        if(playing == false){
+        if (playing == false) {
             $scope.timeLeft = timeLeft;
             $scope.score = score;
             $scope.round = round;
-        }
 
-        playing = true;
+            let startGame = $mdDialog.confirm()
+                .parent(angular.element(document.querySelector('#info')))
+                .title('Välkommen till Vimsedalen!')
+                .textContent('Tryck på "Spela" när du är redo.')
+                .ariaLabel('Spela')
+                .ok('Spela')
+                .cancel('Nej, tack')
+
+            $mdDialog.show(startGame).then(function () {
+                playing = true;
+                timer = $interval(function () {
+                    if ($scope.timeLeft > 0) {
+                        $scope.timeLeft = --$scope.timeLeft;
+                    }
+                }, 1000);
+            }, function () {
+                window.location.reload();
+            });
+
+        }
 
         $scope.pictures = shuffle(pictureCollection);
 
         let randomNumber = Math.floor(Math.random() * $scope.pictures.length);
         $scope.rightPicture = $scope.pictures[randomNumber].picName;
-        
+
         let timer;
-         
-        timer = $interval(function () {
-            if ($scope.timeLeft > 0) {
-                $scope.timeLeft = --$scope.timeLeft;
-            }
-        }, 1000);
+
+        if (playing == true) {
+            timer = $interval(function () {
+                if ($scope.timeLeft > 0) {
+                    $scope.timeLeft = --$scope.timeLeft;
+                }
+            }, 1000);
+        }
+
 
 
         $scope.checkIfRightPicture = function (event) {
 
             if (randomNumber == event.target.id) {
-               
+
                 $interval.cancel(timer);
                 timer = undefined;
 
-            
-                    $scope.score = $scope.score + $scope.timeLeft;
-                
 
-                //alert("Ja, du hittade rätt!");
+                $scope.score = $scope.score + $scope.timeLeft;
+
+
 
                 removeClassWrong();
 
-                if($scope.round == 10){
-                   if(confirm("Bra jobbat! Du fick totalt " + $scope.score + " poäng. Vill du spela igen?")){
-                        playing = false;
-                        return gameloop();
-                    } else {
-                        return alert("Tack för att du spelade. Ses snart igen!")
-                    } 
-                }
-                
-                if(playing){
-                    
-                $scope.timeLeft = timeLeft;
-                
-                if($scope.round < 10){
-                     $scope.round = ++$scope.round;
+                if ($scope.round == totalRounds) {
+
+
+                    let startGame = $mdDialog.confirm()
+                        .parent(angular.element(document.querySelector('#info')))
+                        .title('Bra jobbat!')
+                        .textContent('Du har hittat hela skeppets besättning. Du fick ' + $scope.score + ' poäng. Vill du spela igen?')
+                        .ariaLabel('Spela igen')
+                        .ok('Spela igen!')
+                        .cancel('Nej, tack')
+
+                    $mdDialog.show(startGame).then(function () {
+                        window.location.reload();
+                    }, function () {
+                        $mdDialog.show($mdDialog.alert()
+                            .parent(angular.element(document.querySelector('#info')))
+                            .title('Slutspelat för idag')
+                            .textContent('Vi ses snart igen.')
+                            .ariaLabel('Tack för idag')
+                            .ok('Ses snart.'));
+                        window.location.reload();
+                    });
+
                 }
 
-                gameloop();
-                
+                if (playing) {
+
+                    $scope.timeLeft = timeLeft;
+
+                    if ($scope.round < totalRounds) {
+                        $scope.round = ++$scope.round;
+                    }
+
+                    gameloop();
+
                 }
 
             } else {
@@ -96,7 +133,7 @@ app.controller('gameController', function ($scope, $interval) {
 
         }
 
-       
+
     }
     gameloop();
 
